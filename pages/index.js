@@ -14,6 +14,7 @@ function HomePage(props) {
 }
 
 export async function getStaticProps() {
+  console.log('re-generating')
   const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json')
   // cwd (current working directory) -> root folder
   const jsonData = await fs.readFile(filePath)
@@ -22,7 +23,8 @@ export async function getStaticProps() {
   return {
     props: {
       products: data.products
-    }
+    },
+    revalidate: 30
   }
 }
 
